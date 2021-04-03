@@ -1,0 +1,107 @@
+<div class="container">
+
+    <div class="container mb-3 mt-2">
+        <div class="row" *ngFor="let partner of partners$ | async">
+
+            <div class="col-md-2"> {{partner.id}} </div>
+            <div class="col-md-2"> {{partner.firstName}} </div>
+            <div class="col-md-2"> {{partner.lastName}} </div>
+            <div class="col-md-2"> {{partner.email}}</div>
+            <div class="col-md-2" (click)="deletePartner(partner.id)"> Delete </div>
+            <div class="col-md-2" (click)="updatePartner(partner)"> Update </div>
+        </div>
+    </div>
+
+
+    <form [formGroup]="AddPartnerForm">
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">First Name</span>
+                </div>
+                <input type="text" class="form-control" placeholder="First Name" aria-label="First Name"
+                    aria-describedby="basic-addon1" formControlName="firstName">
+
+                <span class="err-msg"
+                    *ngIf="AddPartnerForm.get('firstName').touched &&  AddPartnerForm.get('firstName').hasError('required')"
+                    class="text text-danger">Enter valid email</span>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Last Name</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name"
+                    aria-describedby="basic-addon1" formControlName="lastName">
+
+                <span class="err-msg"
+                    *ngIf="AddPartnerForm.get('lastName').touched &&  AddPartnerForm.get('lastName').hasError('required')"
+                    class="text text-danger">Enter valid email</span>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Email</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Email Address" aria-label="Email Address"
+                    aria-describedby="basic-addon1" formControlName="email">
+
+                <span class="err-msg"
+                    *ngIf="AddPartnerForm.get('email').touched &&  AddPartnerForm.get('email').hasError('email')"
+                    class="text text-danger">Enter valid email</span>
+
+
+                <span class="err-msg"
+                    *ngIf="AddPartnerForm.get('email').touched &&  AddPartnerForm.get('email').hasError('required')"
+                    class="text text-danger">Enter email</span>
+            </div>
+
+
+            <div class="col-md-4 mb-3">
+
+                <div class="form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Budget</span>
+                    </div>
+                    <input type="number" class="form-control" placeholder="Budget" aria-label="Budget"
+                        aria-describedby="basic-addon1" formControlName="budget">
+
+                    <span class="err-msg"
+                        *ngIf="AddPartnerForm.get('budget').touched &&  AddPartnerForm.get('budget').hasError('required')"
+                        class="text text-danger">Enter valid email</span>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Phone Number</span>
+                </div>
+                <input type="number" class="form-control" placeholder="Phone Number" aria-label="Phone Number"
+                    aria-describedby="basic-addon1" formControlName="phoneNumber">
+
+                <span class="err-msg"
+                    *ngIf="AddPartnerForm.get('phoneNumber').touched &&  AddPartnerForm.get('phoneNumber').hasError('required')"
+                    class="text text-danger">Enter valid email</span>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-danger" (click)="resetForm()">Reset</button>
+
+                <button type="button" class="btn btn-success ml-4  pull-right" (click)="insertPartnerInfo()">
+                    {{AddPartnerForm.get('id').value ? 'Update' : 'Success' }}
+
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </form>
+</div>
